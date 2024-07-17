@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wabiz_riverpod_2/async_notifier_provider/my_async_notifier_provider.dart';
-import 'package:wabiz_riverpod_2/notifier_provider/my_notifier_provider.dart';
 
 void main() {
   runApp(
@@ -9,6 +8,15 @@ void main() {
       child: const MainApp(),
     ),
   );
+}
+
+class RiverpodWidget extends StatelessWidget {
+  const RiverpodWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text('RiverpodWidget');
+  }
 }
 
 class MainApp extends StatelessWidget {
