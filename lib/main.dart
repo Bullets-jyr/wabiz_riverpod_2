@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wabiz_riverpod_2/notifier_provider/my_notifier_provider.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(
+    ProviderScope(
+      child: const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
@@ -9,10 +15,34 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
+        body: Column(
+          children: [
+            Consumer(
+              builder: (context, ref, child) {
+                final count = ref.watch(counterNotifierProvider);
+                return Text(
+                  '${count}',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+        floatingActionButton: Consumer(
+          builder: (context, ref, child) {
+            return FloatingActionButton(
+              onPressed: () {
+                ref.read(counterNotifierProvider.notifier).increment();
+              },
+              child: Icon(
+                Icons.add,
+              ),
+            );
+          }
         ),
       ),
     );
